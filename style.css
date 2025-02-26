@@ -1,0 +1,209 @@
+/* Global styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+/* Titel animation */
+.title {
+  font-size: 4rem;
+  text-align: center;
+  color: #ffffff;
+  opacity: 0;
+  animation: fadeInOut 4s ease-in-out forwards; /* Fade in och out animation */
+  
+  /* Centrering av headern */
+  position: absolute;
+  top: 50%; /* Vertikal centrering */
+  left: 50%; /* Horisontell centrering */
+  transform: translate(-50%, -50%); /* Justera för att verkligen centrera den */
+}
+
+/* Gallery container (initialt döljs) */
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Skapar 10 kolumner */
+  grid-gap: 10px;
+  padding: 10px;
+  opacity: 0; /* Döljer griden initialt */
+  animation: fadeInGrid 1s ease-in-out 2s forwards; /* Griden visas efter 2 sekunder */
+  transition: transform 0.5s ease-out;
+  
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 10vh; 
+}
+
+
+
+
+/* Animation för fade-in och fade-out för titel */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1; /* Titel syns på 50% av animationen */
+  }
+  80% {
+    opacity: 1; /* Titel stannar kvar längre innan fade out */
+  }
+  100% {
+    opacity: 0; /* Titel försvinner på slutet */
+  }
+}
+
+/* Animation för fade-in för griden */
+@keyframes fadeInGrid {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1; /* Griden visas med opacity 1 */
+  }
+}
+
+/* Bild animation för opacitet */
+@keyframes fadeInDiagonal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply animation for each image */
+#gallery a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, margin 0.3s ease;
+  aspect-ratio: 1 / 1;
+  opacity: 0; /* Initialt osynlig */
+  animation: fadeInDiagonal 5s ease-in-out forwards;
+}
+
+/* Hover effekt */
+.gallery img:hover {
+  transform: scale(1.1); /* Skalar upp bilden med 5% vid hover */
+}
+
+/* Lägg till individuell fördröjning för varje bild */
+.gallery img:nth-child(1) {
+  animation-delay: 0s !important;
+  object-position: 9% 90%;
+}
+.gallery img:nth-child(2),
+.gallery img:nth-child(11) {
+  animation-delay: 0.4s !important;
+  object-position: left center;
+}
+.gallery img:nth-child(3),
+.gallery img:nth-child(12),
+.gallery img:nth-child(21) {
+  animation-delay: 0.8s !important;
+  object-position: right center;
+}
+.gallery img:nth-child(4),
+.gallery img:nth-child(13),
+.gallery img:nth-child(22),
+.gallery img:nth-child(31) {
+  animation-delay: 1.2s !important;
+  object-position: center bottom;
+}
+.gallery img:nth-child(5),
+.gallery img:nth-child(14),
+.gallery img:nth-child(23),
+.gallery img:nth-child(32),
+.gallery img:nth-child(41) {
+  animation-delay: 1.6s !important;
+  object-position: top left;
+}
+.gallery img:nth-child(6),
+.gallery img:nth-child(15),
+.gallery img:nth-child(24),
+.gallery img:nth-child(33),
+.gallery img:nth-child(42),
+.gallery img:nth-child(50) {
+  animation-delay: 2s !important;
+  object-position: bottom right;
+}
+.gallery img:nth-child(7),
+.gallery img:nth-child(16),
+.gallery img:nth-child(25),
+.gallery img:nth-child(34),
+.gallery img:nth-child(43) {
+  animation-delay: 2.4s !important;
+  object-position: top right;
+}
+.gallery img:nth-child(8),
+.gallery img:nth-child(17),
+.gallery img:nth-child(26),
+.gallery img:nth-child(35),
+.gallery img:nth-child(44) {
+  animation-delay: 2.8s !important;
+  object-position: bottom left;
+}
+.gallery img:nth-child(9),
+.gallery img:nth-child(18),
+.gallery img:nth-child(27),
+.gallery img:nth-child(36),
+.gallery img:nth-child(45) {
+  animation-delay: 3.2s !important;
+  object-position: center;
+}
+.gallery img:nth-child(10),
+.gallery img:nth-child(19),
+.gallery img:nth-child(28),
+.gallery img:nth-child(37),
+.gallery img:nth-child(46) {
+  animation-delay: 3.8s !important;
+  object-position: top center;
+}
+.gallery img:nth-child(20),
+.gallery img:nth-child(29),
+.gallery img:nth-child(38),
+.gallery img:nth-child(47) {
+  animation-delay: 4.2 !important;
+  object-position: top center;
+}
+.gallery img:nth-child(30),
+.gallery img:nth-child(39),
+.gallery img:nth-child(48) {
+  animation-delay: 4.6s !important;
+}
+.gallery img:nth-child(40),
+.gallery img:nth-child(49) {
+  animation-delay: 5s !important;
+}
+.gallery img:nth-child(50) {
+  animation-delay: 5.4s !important;
+  object-position: 9% 90%;
+}
+
+
+/* Responsivitet för mobil */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 bilder per rad på mindre skärmar */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 bilder per rad på små skärmar */
+  }
+}
