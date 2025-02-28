@@ -5,59 +5,109 @@
   box-sizing: border-box;
 }
 
-/* Body styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #000000;
-  overflow: hidden;
+@font-face {
+  font-family: "SanFranciscoRegular";
+  src: url("https://cdn.glitch.global/f78a6fd5-e9c0-4ba0-89ea-effaa167feb1/SF-Pro-Display-Regular.woff2?v=1740589712383")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
-/* Titel animation */
-.title {
-  font-size: 4rem;
-  text-align: center;
+@font-face {
+  font-family: "SanFranciscoItalic";
+  src: url("https://cdn.glitch.global/f78a6fd5-e9c0-4ba0-89ea-effaa167feb1/SF-Pro-Display-RegularItalic.woff2?v=1740589721672")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.san-francisco {
+  font-family: "SanFranciscoItalic", sans-serif; /* Här tilldelar vi fonten */
+}
+
+/* Body styling */
+body {
+  font-family: SanFranciscoRegular, sans-serif;
+  background-color: #000000;
+}
+
+.logo-container {
+  text-align: center; /* Centrerar innehållet horisontellt */
+  padding: 40px 0; /* Ger lite utrymme runt logotypen */
+  opacity: 0; /* Döljer initialt */
+  animation: fadeInGrid 1s ease-in-out 2s forwards; /* Fade-in samtidigt som bilderna */
+}
+
+.logo-container img {
+  width: 120px; /* Justera storleken på loggan */
+  height: auto; /* Bevarar bildens proportioner */
+}
+
+.other-text {
+  font-size: 10px;
   color: #ffffff;
+  text-align: center;
+  line-height: 15px;
+  margin-top: 7px;
+  font-family: SanFranciscoRegular, sans-serif;
+  font-weight: normal;
+}
+
+.logo-text {
+  font-size: 10px; /* Ändra storlek på texten */
+  color: #ffffff; /* Ändra färg på texten */
+  text-align: center; /* Säkerställer att texten är centrerad */
+  line-height: 15px;
+  margin-top: 7px; /* Skapar lite avstånd mellan loggan och texten */
+  font-family: SanFranciscoBold, sans-serif; /* Använd ditt valda typsnitt */
+  font-weight: bold;
+}
+
+.title-image {
+  width: 60vw; /* Anpassa storleken, kan justeras efter behov */
+  max-width: 500px; /* Begränsar storleken på stora skärmar */
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
-  animation: fadeInOut 4s ease-in-out forwards; /* Fade in och out animation */
-  
+  animation: fadeInOut 4s ease-in-out forwards;
+
   /* Centrering av headern */
   position: absolute;
   top: 50%; /* Vertikal centrering */
   left: 50%; /* Horisontell centrering */
   transform: translate(-50%, -50%); /* Justera för att verkligen centrera den */
 }
-
 /* Gallery container (initialt döljs) */
 #gallery {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* Skapar 10 kolumner */
+  grid-template-columns: repeat(10, 1fr); /* 10 kolumner */
+  grid-auto-rows: 1fr; /* Gör raderna lika höga som kolumnerna */
   grid-gap: 10px;
   padding: 10px;
   opacity: 0; /* Döljer griden initialt */
-  animation: fadeInGrid 1s ease-in-out 2s forwards; /* Griden visas efter 2 sekunder */
+  animation: fadeInGrid 1s ease-in-out 4s forwards; /* Griden visas efter 2 sekunder */
   transition: transform 0.5s ease-out;
-  
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: 10vh; 
+
+  max-width: 70%;
+  margin: 0 auto;
+  margin-top: 10vh;
 }
 
-
-
-
-/* Animation för fade-in och fade-out för titel */
 @keyframes fadeInOut {
   0% {
     opacity: 0;
   }
   50% {
-    opacity: 1; /* Titel syns på 50% av animationen */
+    opacity: 1;
   }
   80% {
-    opacity: 1; /* Titel stannar kvar längre innan fade out */
+    opacity: 1;
   }
   100% {
-    opacity: 0; /* Titel försvinner på slutet */
+    opacity: 0;
   }
 }
 
@@ -81,14 +131,23 @@ body {
   }
 }
 
-/* Apply animation for each image */
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* 10 kolumner */
+  grid-auto-rows: auto; /* Anpassar raderna automatiskt efter innehållet */
+  grid-gap: 10px;
+  padding: 5px;
+  max-width: 70%;
+  max-height: 70%;
+  margin: 0 auto;
+  margin-top: -1vh;
+}
+
 #gallery a img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  aspect-ratio: 1 / 1; /* Tvingar kvadratisk form */
+  object-fit: cover; /* Ser till att hela bilden täcker rutan utan att sträckas */
   border-radius: 8px;
-  transition: transform 0.3s ease, margin 0.3s ease;
-  aspect-ratio: 1 / 1;
   opacity: 0; /* Initialt osynlig */
   animation: fadeInDiagonal 5s ease-in-out forwards;
 }
@@ -191,19 +250,28 @@ body {
   object-position: 9% 90%;
 }
 
-
-/* Responsivitet för mobil */
 @media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* 3 bilder per rad på mindre skärmar */
+  body {
+    overflow: auto; /* Möjliggör scrollning på hela sidan */
+  }
+
+  #gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolumner */
+    grid-gap: 5px;
+    margin-top: -1vh; /* Minska avståndet från logotyp och text */
+    max-height: 90vh; /* Gör att man kan scrolla inom detta område */
   }
 }
 
-@media (max-width: 480px) {
-  .gallery {
-    grid-template-columns: repeat(2, 1fr); /* 2 bilder per rad på små skärmar */
-  }
+.lg-download {
+  display: none !important;
+}
+
+.lg-item {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out !important;
+}
+
+.lg-item.lg-current {
+  opacity: 1 !important;
 }
