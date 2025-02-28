@@ -54,6 +54,7 @@ const imageUrls = [
 
 const gallery = document.querySelector('.gallery');
 
+
 // Skapa 50 bilder
 for (let i = 0; i < 50; i++) {
     const img = document.createElement('img');
@@ -61,6 +62,8 @@ for (let i = 0; i < 50; i++) {
     img.alt = 'Bild ' + (i + 1);
     gallery.appendChild(img);
 }
+
+
 
 // Lägg till eventlistener för musrörelse
 document.addEventListener('mousemove', (e) => {
@@ -76,5 +79,4 @@ document.addEventListener('mousemove', (e) => {
     // Applicera transformation på griden
     gallery.style.transform = `translate(${moveX}px, ${moveY}px)`;
 });
-
 
